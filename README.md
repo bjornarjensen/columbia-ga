@@ -3,11 +3,11 @@
 COLUMBIA is an interdisciplinary project that aims to develop an innovative tool, based on the state-of-the-art machine learning technology, to efficiently analyze large amount of model data to better understand
 why some models behave very differently than the others. Combined with our current knowledge of how the climate system works based on the observational evidence, we will constraint the large spread in these model simulations. Also using our novel tool, we hope to filter out those climate models that do not represent well the important dynamics observed in nature.
 
-It is funded by Research Council of Norway (RCN) and led by Research Professor Jerry Tjiputra at NORCE - Norwegian Research Centre AS.
+It is funded by Research Council of Norway (RCN) and led by **Research Professor Jerry Tjiputra** at NORCE - Norwegian Research Centre AS.
 
 # Authors
 
-The main developer is Chief Scientist Klaus Johannsen, also at NORCE. 
+The main developer is **Chief Scientist Klaus Johannsen**, also at NORCE. 
 
 Contributing developers:
 
