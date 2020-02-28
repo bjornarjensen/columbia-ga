@@ -1,0 +1,23 @@
+#!/usr/bin/perl -w
+
+# init
+$time_0=time;
+@ARGV==2 or die "usage: run <script.py> <num exec>\n";
+$script=$ARGV[0];
+$num_exec=$ARGV[1];
+
+# run
+system("tar cfz transfer.tgz modules");
+system("zip -q -u -r modules ./modules -x modules/__pycache__/\*");
+$cmd="/local/spark231pre/bin/spark-submit --master yarn --num-executors $num_exec --files transfer.tgz --py-files modules.zip $script $num_exec";
+system("$cmd\n");
+
+# finish
+system("rm transfer.tgz");
+$time_1=time;
+$dt=$time_1-$time_0;
+print("###################\n");
+print("Execution time: $dt\n");
+print("###################\n");
+
+
