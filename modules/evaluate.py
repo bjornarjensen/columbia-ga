@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 # std libs
+import os
 import numpy as np
 import numpy.linalg as la
 import scipy.stats as stats
@@ -9,6 +10,7 @@ import pandas as pd
 # own modules
 import modules.aos as aos
 import modules.gen as gen
+import modules.data as data
 
 
 log = gen.getLogger(__name__)
