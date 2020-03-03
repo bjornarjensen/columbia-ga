@@ -12,6 +12,7 @@ The main developer is **Chief Scientist Klaus Johannsen**, also at NORCE.
 Contributing developers:
 
 - Bjørnar Jensen, Senior researcher at NORCE
+- Fumiaki Ogawa, Researcher at University of Bergen
 
 # Usage
 
@@ -29,9 +30,17 @@ On computer without spark:
 
 ## Simple cases - no genetic algorithm
 
-Here we have two classed, defined in the `do_JJA_scan.py`. `Evaluate` which carries out the evaluation through its `__call__` member function. `Evaluate_all` which creates numpy arrays that mimic genetic algorithm populations. This then calls `evaluate` on the population, gathers the result and saves the computed output to files.
+In `modules/evaluate.py` two classes `Evaluate` and `Evaluate_all` are defined. `Evaluate` carries out the evaluation through its `__call__` member function. `Evaluate_all` creates numpy arrays that mimic genetic algorithm populations. `Evaluate_all` then calls `evaluate` on the population, gathers the result and saves the computed output to files. These classes are imported
+into `do_JJA_scan.py` where they are run.
+
+New classes for other cases should be added to `modules/evaluate.py` as needed
+and used in a like-wise manner.
 
 ## With genetic algorithms
 
-Create a class `Evaluate` with a `__call__` member function. Pass this as `eval_` parameter into the genetic algorithm, see `modules.ga.Simple` for an example. Adjust genetic algorithm to suit your needs.
+Create a class `Evaluate` with a `__call__` member function, as above in 
+`modules.evaluate`. Pass this as `eval_` parameter into the genetic algorithm, see `modules.ga.Simple` for an example. Adjust genetic algorithm to suit your needs.
+
+New genetic algorithms should be added to `modules/ga.py` as needed.
+
 
