@@ -7,6 +7,7 @@ import scipy.stats as stats
 import pandas as pd
 
 # own modules
+import modules.aos as aos
 import modules.gen as gen
 
 
