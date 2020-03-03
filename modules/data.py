@@ -403,14 +403,6 @@ class uas:
     def attributes(self):
         return(['_uas_file', 'x', 'y', 'z', 't', 'nx', 'ny', 'nz', 'nt'])
 
-    def plot_uas(self, grid=[], out='screen', title=''):
-        m = geo.map(grid=[], out=out, title='Mask')
-        m.plotgrid(self)
-        m.finish()
-
-    def plot(self, grid=[], out='screen', title=''):
-        self.plot_uas(grid=grid, out=out, title=title)
-
     def __str__(self):
         s = "--- uas ---\n"
         s = s + "file: %s\n" % self._uas_file
@@ -511,10 +503,10 @@ class uas_ens_avg:
 class ua:
     def __init__(self, data):
         # aos
-        # obj = aos.DataObject(('ua',data))
-        # if obj.load():
-        #     obj.copy(self)
-        #     return(None)
+        obj = aos.DataObject(('ua', data))
+        if obj.load():
+            obj.copy(self)
+            return(None)
 
         # logging
         log = gen.getLogger(gen.getClassName(self))
@@ -528,7 +520,7 @@ class ua:
             raise Exception("ua: Initialization error, unknow mode")
 
         # aos
-        # obj.save(self)
+        obj.save(self)
 
     def _init_ua_from_file(self, ua_file):
         # logging
@@ -538,6 +530,7 @@ class ua:
         if not ua_file.exists():
             log.critical("Initialization error, file '%s' not found" % ua_file)
             raise Exception("ua: Initialization error, file '%s' not found" % ua_file)
+
         self._ua_file = ua_file
         g = xr.open_dataset(self._ua_file)
         self.plev_to_extract = 70000
@@ -552,6 +545,7 @@ class ua:
         else:
             log.critical("Initialization error, cannot read 'plev'")
             raise Exception("ua: Initialization error, cannot read 'plev'")
+
         log.info("plev: %s" % str(self.plev))
         idc = np.where(self.plev == self.plev_to_extract)[0]
         if idc.shape[0] != 1:
@@ -568,15 +562,8 @@ class ua:
         self.data = g['ua'].values[:, self.plev_idx, :, :]  # array for (time, lat, lon)
 
     def attributes(self):
-        return(['_ua_file', 'plev_to_extract', 'x', 'y', 'plev', 'plev_idx', 't', 'nx', 'ny', 'nt'])
-
-    def plot_uas(self, grid=[], out='screen', title=''):
-        m = geo.map(grid=[], out=out, title='Mask')
-        m.plotgrid(self)
-        m.finish()
-
-    def plot(self, grid=[], out='screen', title=''):
-        self.plot_uas(grid=grid, out=out, title=title)
+        return(['_ua_file', 'plev_to_extract', 'x', 'y',
+                'plev', 'plev_idx', 't', 'nx', 'ny', 'nt'])
 
     def __str__(self):
         s = "--- ua ---\n"
@@ -641,6 +628,7 @@ class ua_ens_avg:
                 self.cfg['hadoop']['data_regridded']['path_base']['rcp85']).joinpath('ua/mon')
         else:
             raise Exception("ua_ens_avg: time period '%s' not known" % time_period)
+
         print("Load data from time period %s" % time_period)
         log.info("ua_ens_avg: Load data from time period %s" % time_period)
         for name in self._models:
@@ -705,6 +693,7 @@ class ua_ens_month_avg:
                 self.cfg['hadoop']['data_regridded']['path_base']['rcp85']).joinpath('ua/mon')
         else:
             raise Exception("ua_ens_avg: time period '%s' not known" % time_period)
+
         print("Load data from time period %s" % time_period)
         log.info("ua_ens_month_avg: Load data from time period %s" % time_period)
         for name in self._models:
