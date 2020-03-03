@@ -11,7 +11,6 @@ import pathlib as pl
 
 import modules.aos as aos
 import modules.gen as gen
-import modules.config as config
 
 # -----------------------------------------------------------------------------
 # model names
@@ -602,7 +601,7 @@ class ua:
 
 
 class ua_ens_avg:
-    def __init__(self, time_period=0):
+    def __init__(self, cfg, time_period=0):
         # logging
         log = gen.getLogger(gen.getClassName(self))
         log.info("start creating ua ensemble average")
@@ -616,16 +615,16 @@ class ua_ens_avg:
         # init
         self._time_period = time_period
         self._models = NAMES_UA
-        self.cfg = config.read("2019-07-28-Fumiaki.yml")
+        self.cfg = dict(cfg)
 
         # create list of time_avg_lat_lon 2D-fields
         ensemble_time_avg_lat_lon = []
         if time_period == '1979-2005':
             directory_prefix = pl.Path(
-                self.cfg['hadoop']['data_regridded']['path_base']['historical']).joinpath('ua/mon')
+                self.cfg['data_folders']['historical']).joinpath('ua/mon')
         elif time_period == '2070-2099':
             directory_prefix = pl.Path(
-                self.cfg['hadoop']['data_regridded']['path_base']['rcp85']).joinpath('ua/mon')
+                self.cfg['data_folders']['rcp85']).joinpath('ua/mon')
         else:
             raise Exception("ua_ens_avg: time period '%s' not known" % time_period)
 
@@ -667,7 +666,7 @@ class ua_ens_avg:
 
 
 class ua_ens_month_avg:
-    def __init__(self, time_period=0, models=NAMES_UA):
+    def __init__(self, cfg, time_period=0, models=NAMES_UA):
         # logging
         log = gen.getLogger(gen.getClassName(self))
         log.info("start creating ua ensemble monthly average")
@@ -681,16 +680,16 @@ class ua_ens_month_avg:
         # init
         self._time_period = time_period
         self._models = models
-        self.cfg = config.read("2019-07-28-Fumiaki.yml")
+        self.cfg = dict(cfg)
 
         # create list of time_avg_lat_lon 2D-fields
         ensemble_time_avg_lat_lon = []
         if time_period == '1979-2005':
             directory_prefix = pl.Path(
-                self.cfg['hadoop']['data_regridded']['path_base']['historical']).joinpath('ua/mon')
+                self.cfg['data_folders']['historical']).joinpath('ua/mon')
         elif time_period == '2070-2099':
             directory_prefix = pl.Path(
-                self.cfg['hadoop']['data_regridded']['path_base']['rcp85']).joinpath('ua/mon')
+                self.cfg['data_folders']['rcp85']).joinpath('ua/mon')
         else:
             raise Exception("ua_ens_avg: time period '%s' not known" % time_period)
 

@@ -1,7 +1,3 @@
-hadoop:
-    data_regridded:
-        path_base: 
-            historical: /hdisk3/COLOMBIA/2019-07-28-Fumiaki/CMIP5/atmos/rawDATA_copy/historical
-            rcp85: /hdisk3/COLOMBIA/2019-07-28-Fumiaki/CMIP5/atmos/rawDATA_copy/rcp85
-
-
+data_folders:
+  historical: /hdisk3/COLOMBIA/2019-07-28-Fumiaki/CMIP5/atmos/rawDATA_copy/historical
+  rcp85: /hdisk3/COLOMBIA/2019-07-28-Fumiaki/CMIP5/atmos/rawDATA_copy/rcp85

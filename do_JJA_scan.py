@@ -7,6 +7,7 @@ import modules.aos as aos
 import modules.fmt as fmt
 import modules.gen as gen
 import modules.data as data
+import modules.config as config
 import modules.parallel as parallel
 import modules.evaluate as evaluate
 
@@ -20,6 +21,7 @@ log.info('Initializing aos.')
 aos.path = 'objects'
 aos.verbose = 0
 aos.auto = 1
+cfg = config.read('conf/2019-07-28-Fumiaki.yml')
 
 # --------------------------------------------------------------------------------------------------
 # prepare data and model names
@@ -30,12 +32,12 @@ excluded_models = []
 models = [m for m in data.NAMES_UA if m not in excluded_models]
 
 # Load and format historic data
-historic_month_1d = data.ua_ens_month_avg(time_period='1979-2005', models=models)
+historic_month_1d = data.ua_ens_month_avg(cfg=cfg, time_period='1979-2005', models=models)
 [historic_data_month_2d, historic_area_month_2d] = fmt.crop_2d_360_180_2d_360_60(
     fmt.reformat_1d_ens_2d_360_180(historic_month_1d))
 
 # Load and format future data
-future_month_1d = data.ua_ens_month_avg(time_period='2070-2099', models=models)
+future_month_1d = data.ua_ens_month_avg(cfg=cfg, time_period='2070-2099', models=models)
 [future_data_month_2d, future_area_month_2d] = fmt.crop_2d_360_180_2d_360_60(
     fmt.reformat_1d_ens_2d_360_180(future_month_1d))
 
