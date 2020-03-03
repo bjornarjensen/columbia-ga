@@ -14,6 +14,14 @@ Contributing developers:
 - Bjørnar Jensen, Senior researcher at NORCE
 - Fumiaki Ogawa, Researcher at University of Bergen
 
+# Installation
+
+```bash
+mkdir ~/projects
+git clone git@github.com:bjornarjensen/columbia-ga.git
+cd ~/projects/columbia-ga/
+```
+
 # Usage
 
 On Spark cluster:
