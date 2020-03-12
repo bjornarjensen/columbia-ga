@@ -1,0 +1,17 @@
+name: cga
+channels:
+  - conda-forge
+  - anaconda
+  - defaults
+dependencies:
+  - python>=3.7
+  - numpy
+  - pandas
+  - scipy
+  - xarray
+  - deap
+  - cftime
+  - pyaml
+  - sphinx
+  - recommonmark
+
