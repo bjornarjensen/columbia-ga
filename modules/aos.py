@@ -31,6 +31,7 @@ import pickle
 import os.path
 import numpy as np
 import modules.gen as gen
+import pathlib
 
 # -----------------------------------------------------------------------------
 # global variables
@@ -239,6 +240,7 @@ class DataObject:
         """
         global readonly
         if auto:
+            pathlib.Path(self._file_).parent.mkdir(exist_ok=True, parents=True)
             f = open(self._file_, 'wb')
             pickle.dump(x, f, pickle.HIGHEST_PROTOCOL)
             if readonly:
